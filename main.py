@@ -36,9 +36,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-class MainPage(webapp2.RequestHandler):
-
-    def get(self):
+def header(self):
         # Checks for active Google account session
         user = users.get_current_user()
 
@@ -63,6 +61,19 @@ class MainPage(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('header.html')
         self.response.write(template.render(template_values))
 
+def tail(self):
+		tail = JINJA_ENVIRONMENT.get_template('tail.html')
+		self.response.write(tail.render())
+
+class MainPage(webapp2.RequestHandler):
+	def get(self):
+		header(self)
+
+		tail(self)
+    
+
+
 app = webapp2.WSGIApplication([
+	
     ('/', MainPage),
 ], debug=True)
