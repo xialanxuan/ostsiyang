@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+<head>
+<style>
+h1 {text-align:center;}
+h3 {text-align:center;}
+h5 {text-align:center;}
+
+</style>
+</head>
+<body>
+
+
+  <h1>OPEN SOURCE TOOL FINAL PROJECT</h1>
+  <h5>from zero to this</h5>
+
+
+  <h3><a href="/">Home</a></br>
+<br>{{ url_response }} | <a href="{{ url }}">{{ url_linktext }}</a></h3>
+
+  {% if user_control == 1 %}
+  <h5>question</h5>
+  {% endif %}
+
+</body>
+</html>
+{% endautoescape %}
