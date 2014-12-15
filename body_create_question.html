@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% autoescape true %}
+
+<fieldset>
+<table width=70% bordercolor="#FFFFFF" align="center">
+  <tbody>
+
+	<tr>
+    {% if c_new==1 %}
+      <td><h4>You will create your question here</h4></td>
+    {% else %}
+      <td><h4>You will modify your question here</h4></td>
+    {% endif %}
+    </tr>
+
+   </tbody>
+</table>
+<form action="{{ c_url }}" enctype="multipart/form-data" method="post">
+<table width=70% bordercolor="#FFFFFF" align="center">
+  <tbody>
+     {% if c_new==1 %}
+      <tr>
+      <td>Question QID</td>
+      <td><input type="text" placeholder="{{ c_qid }}" style="width:600px;height:30px" name="queid"/></td>
+      </tr>
+      {% else %}
+      <tr>
+      <td>The title is </td>
+      <td> {{ c_qid }}</td>
+      <td><input type="hidden" value = "{{ c_qid }}" name="queid"/></td>
+      </tr>
+      {% endif %}
+
+  	<tr>
+      <td>Question Title</td>
+      <td><input type="text" placeholder="{{ c_title }}" style="width:600px;height:30px" name="quetitle"/></td>
+
+    </tr>
+
+    <tr>
+      <td>Question Body</td>
+      <td><input type="text" placeholder="{{ c_body}}" style="width:600px;height:200px" name="quebody"/></td>
+    </tr>
+    <tr>
+      <td>Tags</td>
+      <td><input type="text"  placeholder="{{ c_tags}}" style="width:600px;height:30px" name="quetag"/></td>
+    </tr>
+    <tr>
+      
+      <td><input type="submit" value="submit"/></td>
+    </tr>
+  </tbody>
+</table>
+</form>
+</fieldset>
+{% endautoescape %}

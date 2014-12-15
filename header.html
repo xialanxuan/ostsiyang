@@ -4,25 +4,82 @@
 <head>
 <style>
 h1 {text-align:center;}
+h2 {text-align:center;}
 h3 {text-align:center;}
+h3 {text-align:left;}
 h5 {text-align:center;}
+p.create {text-align:center;}
+p.user {color:#FFFFFF;}
+.post-heading {
+    position: relative;
+    border-bottom: 3px solid #666;
+}
 
+.post-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.post-date {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    color: #999;
+
+}
+
+.post-content {
+    margin-top: 5px;
+}
 </style>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<title>
+	OPEN SOURCE TOOL FINAL PROJECT
+</title>
 </head>
 <body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Static navbar -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">OST-siyang</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <ul class="nav navbar-nav navbar-middle">
+          <li><p class="navbar-text">{{ url_response }}</p> </li>			  
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{ url }}">{{ url_linktext }}</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </nav>
+  <br><br><br><br>
+  <div class="container">
 
 
-  <h1>OPEN SOURCE TOOL FINAL PROJECT</h1>
-  <h5>from zero to this</h5>
-
-
-  <h3><a href="/">Home</a></br>
-<br>{{ url_response }} | <a href="{{ url }}">{{ url_linktext }}</a></h3>
-
-  {% if user_control == 1 %}
-  <h5><a href="/dashboard">My Questions and Answers</a></h5>
-  {% endif %}
-
-</body>
-</html>
 {% endautoescape %}

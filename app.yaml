@@ -1,5 +1,5 @@
 application: ostsiyang
-version: 5
+version: 6
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -9,7 +9,13 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: .*
+- url: /dashboard/.*
+  script: dashboard.app
+
+- url: /dashboard
+  script: dashboard.app
+
+- url: /.*
   script: main.app
 
 libraries:

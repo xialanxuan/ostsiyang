@@ -1,0 +1,23 @@
+{% autoescape true %}
+
+<div class="col-md-6">
+	<div class="post-heading">
+		<h4>{{ q_v_que.title }}</h4>
+		<li>by {{ q_v_que.author }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at {{ q_v_que.date.strftime('%Y-%m-%d %H:%M') }}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; last modify {{ q_v_que.edit.strftime('%Y-%m-%d %H:%M') }}
+		</li>
+
+	</div>
+	 <div class="post-content">
+		{{ q_v_que.body }}
+		
+		<br>
+		<li>
+		{% for tag in q_v_que.tags %}
+				<a href="{{ "/tag=" ~ tag  }}">{{ tag }}</a>
+		{% endfor %}
+		</li>
+	</div>
+	<br><b><a href="/">Main Page</b></a>
+</div>
+{% endautoescape %}

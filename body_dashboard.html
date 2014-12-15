@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% autoescape true %}
+
+
+
+	<div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+	<h3>Hi {{ user }}, Your Questions are Here</h3>
+  	<p class="create"><h3><a href="dashboard/create">Create a Question</h3></a></p>
+
+	<div class="col-md-12">
+
+
+	{% for que in dashboard_show_que %}	
+	 <div class="post-heading">
+		<h4><a href="{{ "/view=" ~ que.key.id() }}">{{ que.title }}</a></h4>
+		<li>by <a href="{{ "/author=" ~ que.author  }}">{{ que.author }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at {{ que.date.strftime('%Y-%m-%d %H:%M') }}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; last modify {{ que.edit.strftime('%Y-%m-%d %H:%M') }}
+		</li>
+<a href="{{ "/dashboard/edit=" ~ que.key.id() }}">Edit</a>
+	</div>
+	 <div class="post-content">
+		{{ que.body[0:500] }}
+		{% if que.body|length > 500 %}
+		<br> <a href="{{ "/view=" ~ que.key.id() }}">More</a>
+		{% endif %}
+
+		<li>
+		{% for tag in que.tags %}
+		<a href="{{ "/tag=" ~ tag  }}">{{ tag }}</a>
+		{% endfor %}
+		</li>
+	</div>
+	<br><br>
+	{% endfor %}
+	</div>
+	</div>
+{% endautoescape %}

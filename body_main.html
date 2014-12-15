@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+ {% autoescape true %}
+<div class="col-md-3">
+	<ul class="nav nav-list">
+
+	{% if user_control == 1 %}
+  			<li><a href="/dashboard"><h4>My Questions and Answers</h4></a></li>
+ 	{% endif %}
+
+ 	<li class="nav-header"><h4>Blog List</h4></li>
+ 	{% for que in m_ques %}	
+		<li><a href="{{ "/view=" ~ que.key.id() }}">{{ que.title }}</a></li>
+		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by {{que.author }}</li>
+	{% endfor %}
+
+	</ul>
+
+
+</div>
+
+<div class="col-md-6">
+	{% for que in m_ques %}	
+	 <div class="post-heading">
+		<h4><a href="{{ "/view=" ~ que.key.id() }}">{{ que.title }}</a></h4>
+		<li>by <a href="{{ "/author=" ~ que.author  }}">{{ que.author }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at {{ que.date.strftime('%Y-%m-%d %H:%M') }}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; last modify {{ que.edit.strftime('%Y-%m-%d %H:%M') }}
+
+		</li>
+
+	</div>
+	 <div class="post-content">
+		{{ que.body[0:500] }}
+		{% if que.body|length == 0 %}
+		<br> 
+		{% endif %}
+		{% if que.body|length > 500 %}
+		<br> <a href="{{ "/view=" ~ que.key.id() }}">More</a>
+		{% endif %}
+		<li>
+		{% for tag in que.tags %}
+		<a href="{{ "/tag=" ~ tag  }}">{{ tag }}</a>
+		{% endfor %}
+		</li>
+		<a href="{{ "/view=" ~ que.key.id() }}"> permalink </a>
+	</div>
+
+	<br><br>
+	{% endfor %}
+{% if m_ques|length == 10 %}	
+<b><a href="{{ older_url }}">------Older Posts</b></a>
+{% endif %}
+</div>
+
+<div class="col-md-3">
+	<ul class="nav nav-list">
+
+
+
+	</ul>
+
+
+</div>
+{% endautoescape %}
+

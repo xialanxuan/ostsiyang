@@ -1,0 +1,35 @@
+{% autoescape true %}
+
+<div class="col-md-6">
+	<br><b><h3>All Question in tag {{ tag }}</h3></b>
+	<br></br>
+	{% for que in t_que %}	
+	
+	<div class="post-heading">
+		<h4><a href="{{ "/view=" ~ que.key.id() }}">{{ que.title }}</a></h4>
+		<li>by <a href="{{ "/author=" ~ que.author  }}">{{ que.author }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at {{ que.date.strftime('%Y-%m-%d %H:%M') }}</li>
+
+	</div>
+	 <div class="post-content">
+
+		{{ que.body[0:500] }}
+		{% if que.body|length == 0 %}
+		<br> 
+		{% endif %}
+		{% if que.body|length > 500 %}
+		<br> <a href="{{ "/view=" ~ que.key.id() }}">More</a>
+		{% endif %}
+
+		<li>
+		{% for tag in t_que.tags %}
+		{{ tag }}
+		{% endfor %}
+		</li>
+		{% endfor %}
+	</div>
+{% if t_que|length == 10 %}	
+	<b><a href="{{ "tag=" ~ tag}}{{older_url }}">------Older Posts</b></a>
+{% endif %}
+	<br><b><a href="/">Main Page</b></a>
+</div>
+{% endautoescape %}
