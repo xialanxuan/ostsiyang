@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% autoescape true %}
+
+<fieldset>
+<table width=70% bordercolor="#FFFFFF" align="center">
+  <tbody>
+
+	<tr>
+    {% if c_new==1 %}
+      <td><h4>You will create your Answer here</h4></td>
+    {% else %}
+      <td><h4>You will modify your Answer here</h4></td>
+    {% endif %}
+    </tr>
+
+   </tbody>
+</table>
+<form action="{{ c_url }}" enctype="multipart/form-data" method="post">
+<table width=70% bordercolor="#FFFFFF" align="center">
+  <tbody>
+
+      <tr >
+      <td width=20%> Question Title </td>
+      <td> &nbsp;&nbsp;&nbsp; {{ cur_question.title }}</td>
+
+      </tr>
+      <tr>
+      <td>Question Body</td>
+      <td> &nbsp;&nbsp;&nbsp; {{ cur_question.body }}</td>
+
+      </tr>
+
+  	<tr>
+      <td>Answer Title</td>
+      {% if c_new==1 %}
+      <td><input type="text" placeholder="{{ c_title }}" style="width:600px;height:30px" name="anstitle"/></td>
+      {% else %}
+      <td><input type="text" value="{{ c_title }}" style="width:600px;height:30px" name="anstitle"/></td>
+      {% endif %}
+
+    </tr>
+
+    <tr>
+      <td>Answer Body</td>
+      {% if c_new==1 %}
+      <td><input type="text" placeholder="{{ c_body}}" style="width:600px;height:200px" name="ansbody"/></td>
+      {% else %}
+      <td><input type="text" value="{{ c_body}}" style="width:600px;height:200px" name="ansbody"/></td>
+      {% endif %}
+
+    </tr>
+ 
+      
+      <td><input type="submit" value="submit"/></td>
+    </tr>
+  </tbody>
+</table>
+</form>
+</fieldset>
+{% endautoescape %}

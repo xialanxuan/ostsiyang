@@ -1,0 +1,18 @@
+{% autoescape true %}
+<form action="/dashboard/upload" enctype="multipart/form-data" method="post">
+
+<h3>Image Upload:</h3>
+
+ <label>
+        	<div>Name</div>
+        	<input type="text" name="i_name" value="{{image_name}}">
+ </label>
+
+
+<input type="file" name="img"/>
+
+<br><br><input type="submit" value="upload">
+
+</form>
+
+{% endautoescape %}

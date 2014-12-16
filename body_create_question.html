@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% autoescape true %}
 
-<fieldset>
+
 <table width=70% bordercolor="#FFFFFF" align="center">
   <tbody>
 
@@ -20,7 +20,7 @@
   <tbody>
      {% if c_new==1 %}
       <tr>
-      <td>Question QID</td>
+      <td width=20%>Question QID</td>
       <td><input type="text" placeholder="{{ c_qid }}" style="width:600px;height:30px" name="queid"/></td>
       </tr>
       {% else %}
@@ -33,17 +33,30 @@
 
   	<tr>
       <td>Question Title</td>
+      {% if c_new==1 %}
       <td><input type="text" placeholder="{{ c_title }}" style="width:600px;height:30px" name="quetitle"/></td>
+      {% else %}
+      <td><input type="text" value="{{ c_title }}" style="width:600px;height:30px" name="quetitle"/></td>
+      {% endif %}
 
     </tr>
 
     <tr>
       <td>Question Body</td>
-      <td><input type="text" placeholder="{{ c_body}}" style="width:600px;height:200px" name="quebody"/></td>
+      {% if c_new==1 %}
+      <td><input type="text" placeholder="{{ c_body }}" style="width:600px;height:200px" name="quebody"/></td>
+      {% else %}
+      <td><input type="text" value="{{ c_body }}" style="width:600px;height:200px" name="quebody"/></td>
+      {% endif %}
+
     </tr>
     <tr>
       <td>Tags</td>
+      {% if c_new==1 %}
       <td><input type="text"  placeholder="{{ c_tags}}" style="width:600px;height:30px" name="quetag"/></td>
+      {% else %}
+      <td><input type="text"  value="{{ c_tags}}" style="width:600px;height:30px" name="quetag"/></td>
+      {% endif %}
     </tr>
     <tr>
       
@@ -52,5 +65,5 @@
   </tbody>
 </table>
 </form>
-</fieldset>
+
 {% endautoescape %}

@@ -4,7 +4,12 @@
 	<ul class="nav nav-list">
 
 	{% if user_control == 1 %}
-  			<li><a href="/dashboard"><h4>My Questions and Answers</h4></a></li>
+  			<li><a href="/dashboard"><h4>My Questions</h4></a></li>
+  			<li><a href="/dashboard/answer"><h4>My Answers</h4></a></li>
+  			<li><a href="/dashboard/image"><h4>My Images</h4></a></li>
+  			<li><a href="/dashboard/create"><h4>Create a Question</h4></a></li>
+
+
  	{% endif %}
 
  	<li class="nav-header"><h4>Blog List</h4></li>
@@ -41,7 +46,9 @@
 		<a href="{{ "/tag=" ~ tag  }}">{{ tag }}</a>
 		{% endfor %}
 		</li>
-		<a href="{{ "/view=" ~ que.key.id() }}"> permalink </a>
+		<a href="{{ "/view=" ~ que.key.id() }}"> Permalink </a>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="{{ "/questionkey=" ~ que.key.id() ~ "/create" }}">Create Answer </a>
 	</div>
 
 	<br><br>

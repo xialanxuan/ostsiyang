@@ -1,15 +1,39 @@
 {% autoescape true %}
 
 <div class="col-md-6">
+	<h3>Question</h3>
 	<div class="post-heading">
 		<h4>{{ q_v_que.title }}</h4>
 		<li>by {{ q_v_que.author }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at {{ q_v_que.date.strftime('%Y-%m-%d %H:%M') }}
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; last modify {{ q_v_que.edit.strftime('%Y-%m-%d %H:%M') }}
 		</li>
+		{% if q_v_que.author == user %}
+		<a href="{{ "/dashboard/edit=" ~ q_v_que.key.id() }}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="{{ "/dashboard/delete=" ~ q_v_que.key.id() }}">Delete</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		{% endif %}
 
+		<a href="{{ "/dashboard/questionkey=" ~ q_v_que.key.id() ~ "/answer" }}">Create Answer </a>
+		<table>
+		<tr>
+		<td>
+		<form action="/up/qkey={{ q_v_que.key.id() }}" enctype="multipart/form-data" method="post">
+			<input type="submit" value="up"/>
+		</form>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;{{ q_v_que.vote }}&nbsp;&nbsp;&nbsp;
+		</td>
+		<td>
+		<form action="/down/qkey={{ q_v_que.key.id() }}" enctype="multipart/form-data" method="post">
+			 <input type="submit" value="down"/>
+		</form>
+		</td>
+
+	</tr>
+	</table>
 	</div>
 	 <div class="post-content">
-		{{ q_v_que.body }}
+		{{ quebody | safe}}
 		
 		<br>
 		<li>
@@ -17,7 +41,50 @@
 				<a href="{{ "/tag=" ~ tag  }}">{{ tag }}</a>
 		{% endfor %}
 		</li>
+
 	</div>
+
+	{% if q_v_ans %}
+	<h3>Answer</h3>
+	{% endif %}
+	{% for ans in q_v_ans %}
+	<div class="post-heading">
+		<h4>{{ ans.title }}</h4>
+		<li>by {{ ans.author }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at {{ ans.date.strftime('%Y-%m-%d %H:%M') }}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; last modify {{ ans.edit.strftime('%Y-%m-%d %H:%M') }}
+		</li>
+		<table>
+		<tr>
+		<td>
+		<form action="/upans/qkey={{ q_v_que.key.id() }}/akey={{ ans.key.id() }}" enctype="multipart/form-data" method="post">
+			<input type="submit" value="up"/>
+		</form>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;{{ ans.vote }}&nbsp;&nbsp;&nbsp;
+		</td>
+		<td>
+		<form action="/downans/qkey={{ q_v_que.key.id() }}/akey={{ ans.key.id() }}" enctype="multipart/form-data" method="post">
+		 <input type="submit" value="down"/>
+		</form>
+		</td>
+	</tr>
+	</table>
+	</div>
+
+		{{ ans.body | safe }}
+
+		
+		<br>
+		
+		
+		</li>
+{% endfor %}
+
+
+
+
+
 	<br><b><a href="/">Main Page</b></a>
 </div>
 {% endautoescape %}

@@ -2,20 +2,31 @@ from google.appengine.ext import ndb
 
 
 DEFAULT_QUESTION_NAME = 'untitled_question'
+DEFAULT_ANSWER_NAME = 'untitled_answer'
+DEFAULT_IMAGE_NAME = 'untitled_image'
+
+
 
 def que_key(c_title=DEFAULT_QUESTION_NAME):
 	return ndb.key('Question', c_title)
 
+def ans_key(c_title=DEFAULT_ANSWER_NAME):
+    return ndb.key('Answer', c_title)
+
+def img_key(c_title=DEFAULT_IMAGE_NAME):
+    return ndb.key('Image', i_name)
+
 class Image(ndb.Model):
-    ifile = ndb.BlobProperty()
+    image = ndb.BlobProperty()
     url = ndb.StringProperty()
-    user = ndb.StringProperty()
+    name = ndb.StringProperty()
+    author = ndb.StringProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)
 
     @classmethod
     def get_author(cls, user):
-        q = Image.query(Image.user == user)
-        q.order(-Image.date)
+        q = Image.query(Image.author == user).order(-Image.date)
+        q.order(-Image.name)
         return q.fetch()
 
 
@@ -29,8 +40,10 @@ class Question(ndb.Model):
     edit = ndb.DateTimeProperty(auto_now=True)
     body = ndb.TextProperty(indexed=False)
     tags = ndb.StringProperty(repeated=True)
-    up = ndb.StringProperty()
-    down = ndb.StringProperty()
+    up = ndb.StringProperty(repeated=True, indexed=False)
+    down = ndb.StringProperty(repeated=True, indexed=False)
+    vote = ndb.ComputedProperty(lambda self: len(self.up) - len(self.down))
+
 
     def get_all_question(cls,page):
         q = Question.query().order(-Question.date)
@@ -76,18 +89,33 @@ class Question(ndb.Model):
 
 
 class Answer(ndb.Model):
+    qkey = ndb.StringProperty()
+    qauthor = ndb.StringProperty()
+    qtitle = ndb.StringProperty()
+    qbody = ndb.TextProperty(indexed=False)
+    qtags = ndb.StringProperty(repeated=True)
     author = ndb.StringProperty()
     title = ndb.StringProperty()
     body = ndb.TextProperty(indexed=False)
+    date = ndb.DateTimeProperty(auto_now_add=True)
+    edit = ndb.DateTimeProperty(auto_now=True)
+    up = ndb.StringProperty(repeated=True, indexed=False)
+    down = ndb.StringProperty(repeated=True, indexed=False)
+    vote = ndb.ComputedProperty(lambda self: len(self.up) - len(self.down))
 
 
     def get_author(cls,user):
-    	q = Short_Ques.query(Short_Ques.author == user)
-    	return q.fetch()
+        q = Answer.query(Answer.author == user).order(-Answer.vote)
+        q.order(-Answer.date)
+        return q.fetch()
 
+    def get_question(cls,qkey):
+        q = Answer.query(Answer.qkey == qkey).order(-Answer.vote)
+        q.order(-Answer.date)
+        return q.fetch()
 
     def has_que(cls,user,que):
-    	q = Short_Ques.query(ndb.AND(Short_Ques.author == user, Short_Ques.title == que))
+    	q = Answer.query(ndb.AND(Answer.author == user, Answer.title == que))
     	x = q.get()
     	if x:
     		return True

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% autoescape true %}
+
+
+
+	<div class="row">
+	
+
+	<div class="col-md-6">
+	<h3>Hi {{ user }}, Your Answers are Here</h3>
+
+
+	{% for ans in answer %}	
+	 <div class="post-heading">
+	 	<h3>Question</h3>
+		<h4><a href="{{ "/view=" ~ ans.qkey }}">{{ ans.qtitle }}</a></h4>
+		<li>by <a href="{{ "/author=" ~ ans.qkey.author  }}">{{ ans.qauthor }}</a>
+		</li>
+	{% if ans.qauthor == user %}
+		<a href="{{ "/dashboard/edit=" ~ ans.qkey }}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="{{ "/dashboard/delete=" ~ ans.qkey }}">Delete</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		{% endif %}
+		<a href="{{ "/dashboard/questionkey=" ~ ans.qkey ~ "/answer" }}">Create Answer </a>
+	</div>
+	 <div class="post-content">
+		{{ ans.qbody }}
+
+
+		<li>
+		{% for tag in ans.qtags %}
+		<a href="{{ "/tag=" ~ tag  }}">{{ tag }}</a>
+		{% endfor %}
+		</li>
+	</div>
+
+<div class="post-heading">
+	 	<h3>My Answer</h3>
+		<h4>{{ ans.title }}</h4>
+		<li>by {{ ans.author }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at {{ ans.date.strftime('%Y-%m-%d %H:%M') }}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; last modify {{ ans.edit.strftime('%Y-%m-%d %H:%M') }}
+		</li>
+
+	</div>
+	 <div class="post-content">
+		{{ ans.body}}
+	</div>
+	<a href="{{ "/dashboard/answeredit=" ~ ans.key.id() }}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="{{ "/dashboard/answerdelete=" ~ ans.key.id() }}">Delete</a>
+	<br><br>
+
+	{% endfor %}
+
+
+	</div>
+
+
+
+{% endautoescape %}
