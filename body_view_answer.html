@@ -1,0 +1,44 @@
+{% autoescape true %}
+
+<div class="col-md-6">
+	<h3>Answer</h3>
+
+	<div class="post-heading">
+		<h4>{{ answer.title }}</h4>
+		<li>by {{ answer.author }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at {{ answer.date.strftime('%Y-%m-%d %H:%M') }}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; last modify {{ answer.edit.strftime('%Y-%m-%d %H:%M') }}
+		</li>
+		<table>
+		<tr>
+		<td>
+		<form action="/upans/qkey={{ question.key.id() }}/akey={{ answer.key.id() }}" enctype="multipart/form-data" method="post">
+			<input type="submit" value="up"/>
+		</form>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;{{ answer.vote }}&nbsp;&nbsp;&nbsp;
+		</td>
+		<td>
+		<form action="/downans/qkey={{ question.key.id() }}/akey={{ answer.key.id() }}" enctype="multipart/form-data" method="post">
+		 <input type="submit" value="down"/>
+		</form>
+		</td>
+	</tr>
+	</table>
+	</div>
+
+		{{ answer.body | safe }}
+
+		
+		<br>
+		
+		
+		</li>
+
+
+
+
+
+	<br><b><a href="/">Main Page</b></a>
+</div>
+{% endautoescape %}
