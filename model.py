@@ -105,8 +105,8 @@ class Answer(ndb.Model):
 
 
     def get_author(cls,user):
-        q = Answer.query(Answer.author == user).order(-Answer.vote)
-        q.order(-Answer.date)
+        q = Answer.query(Answer.author == user).order(-Answer.date)
+        q.order(-Answer.title)
         return q.fetch()
 
     def get_question(cls,qkey):

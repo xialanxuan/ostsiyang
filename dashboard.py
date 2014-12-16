@@ -46,7 +46,7 @@ class Dashboard(webapp2.RequestHandler):
 			if not page:
 				page = str(0)
 				questions = bound_Question.get_author_question_page(user,1)
-				older_url = "dashboard/2"
+				older_url = "/dashboard/2"
             
 			else:        
 				questions = bound_Question.get_author_question_page(user,int(page))
