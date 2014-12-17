@@ -12,7 +12,7 @@
 
  	{% endif %}
 
- 	<li class="nav-header"><h4>Blog List</h4></li>
+ 	<li class="nav-header"><h4>Question List</h4></li>
  	{% for que in m_ques %}	
 		<li><a href="{{ "/view=" ~ que.key.id() }}">{{ que.title }}</a></li>
 		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by {{que.author }}</li>
@@ -31,6 +31,7 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; last modify {{ que.edit.strftime('%Y-%m-%d %H:%M') }}
 
 		</li>
+
 
 	</div>
 	 <div class="post-content">

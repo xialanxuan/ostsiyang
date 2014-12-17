@@ -74,7 +74,7 @@ def header(self):
 
 
 def body(self):
-        user = users.get_current_user()
+        user = str(users.get_current_user())
         if user:
             user_control = 1
 
@@ -83,10 +83,13 @@ def body(self):
 
         bound_ques = Question()
         m_ques = bound_ques.get_all_question()
-
+        if user == 'saracanwin':
+            god = 1
+        else:
+            god = 0
         template_body_value = {
             'user_control': user_control,
-            'm_ques': m_ques
+            'm_ques': m_ques,
         }
         body = JINJA_ENVIRONMENT.get_template('body_main.html')
         self.response.write(body.render(template_body_value))
