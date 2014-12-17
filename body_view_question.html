@@ -12,8 +12,7 @@
 <a href="{{ "/dashboard/delete=" ~ q_v_que.key.id() }}">Delete</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		{% endif %}
 
-		<a href="{{ "/dashboard/questionkey=" ~ q_v_que.key.id() ~ "/answer" }}">Create Answer </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="{{ "/rss/view=" ~ q_v_que.key.id()~"/rss.xml" }}">RSS </a>
+		<a href="{{ "/dashboard/questionkey=" ~ q_v_que.key.id() ~ "/answer" }}">Create Answer </a>
 		<table>
 		<tr>
 		<td>
@@ -50,7 +49,7 @@
 	{% endif %}
 	{% for ans in q_v_ans %}
 	<div class="post-heading">
-		<h4><a href="{{ "/answer=" ~ ans.key.id() }}">{{ ans.title }}</a></h4>
+		<h4>{{ ans.title }}</h4>
 		<li>by {{ ans.author }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at {{ ans.date.strftime('%Y-%m-%d %H:%M') }}
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; last modify {{ ans.edit.strftime('%Y-%m-%d %H:%M') }}
 		</li>

@@ -28,7 +28,6 @@ import re
 import time
 
 from model import *
-from rss import *
 
 
 
@@ -74,7 +73,7 @@ def header(self):
 
 
 def body(self):
-        user = str(users.get_current_user())
+        user = users.get_current_user()
         if user:
             user_control = 1
 
@@ -83,13 +82,10 @@ def body(self):
 
         bound_ques = Question()
         m_ques = bound_ques.get_all_question()
-        if user == 'saracanwin':
-            god = 1
-        else:
-            god = 0
+
         template_body_value = {
             'user_control': user_control,
-            'm_ques': m_ques,
+            'm_ques': m_ques
         }
         body = JINJA_ENVIRONMENT.get_template('body_main.html')
         self.response.write(body.render(template_body_value))
@@ -153,29 +149,6 @@ class QuestionView(webapp2.RequestHandler):
         self.response.write(display.render(template_values))
         tail(self)
 
-class AnswerView(webapp2.RequestHandler):
-    def get(self,key):
-        header(self)
-        bound_que=Question()
-        bound_ans=Answer()
-        user = str(users.get_current_user())
-        answer=bound_ans.get_by_id(int(key))
-        question=bound_que.get_by_id(int(answer.qkey))
-        quebody = replace_html(question.body)
-        quebody = quebody.replace('\n', '<br>' )
-        ansbody = replace_html(answer.body)
-        ansbody = ansbody.replace('\n', '<br>' )
-        template_values={
-        'key':key,
-        'answer': answer,
-        'ansbody': ansbody,
-        'quebody': quebody,
-        'question': question,
-        'user': user,
-        }
-        display = JINJA_ENVIRONMENT.get_template('body_view_answer.html')
-        self.response.write(display.render(template_values))
-        tail(self)
 
 class AuthorView(webapp2.RequestHandler):
     def get(self,author,page=None):
@@ -334,24 +307,8 @@ class ImageView(webapp2.RequestHandler):
             self.response.headers['Content-Type'] = 'image/png'
             self.response.out.write(im.image)
 
-class RSSHandler(webapp2.RequestHandler):
-    def get(self, view):
-        url = 'http://ostsiyang.appspot.com/view='+view
-        bound_answer=Answer()
-        bound_question=Question()
-        question=bound_question.get_by_id(int(view))
-        answer=bound_answer.get_question(view)
-        temp = { 
-            'question' : question,
-            'url' : url,
-            'answer' : answer,
-            }
-        self.response.headers['Content-Type'] = 'text/xml'
-        display = JINJA_ENVIRONMENT.get_template('rss.xml')
-        self.response.write(display.render(temp))
 
 app = webapp2.WSGIApplication([
-    (r'/rss/view=(.*)/rss.xml', RSSHandler),
     (r'/upans/qkey=(.*)/akey=(.*)', UpAnswer),
     (r'/downans/qkey=(.*)/akey=(.*)', DownAnswer),
     (r'/up/qkey=(.*)', UpQuestion),
@@ -360,8 +317,7 @@ app = webapp2.WSGIApplication([
     (r'/tag=(.*)/([0-9]*)', TagView),
     (r'/tag=(.*)', TagView),
     (r'/author=(.*)/p([0-9]*)', AuthorView),
-    (r'/author=(.*)', AuthorView),    
-    (r'/answer=(.*)', AnswerView),
+    (r'/author=(.*)', AuthorView),
     (r'/view=(.*)', QuestionView),
     ('/([0-9]*)', MainPage),
     ('/', MainPage),
