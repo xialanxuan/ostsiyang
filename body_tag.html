@@ -12,7 +12,7 @@
 	</div>
 	 <div class="post-content">
 
-		{{ que.body[0:500] }}
+		{{ que.body[0:500] | safe }}
 		{% if que.body|length == 0 %}
 		<br> 
 		{% endif %}
