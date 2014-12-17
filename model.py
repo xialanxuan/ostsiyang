@@ -29,6 +29,9 @@ class Image(ndb.Model):
         q.order(-Image.name)
         return q.fetch()
 
+    def get_url(cls, url):
+         q = Image.query(Image.url == url)
+         return q.fetch()
 
 
 
