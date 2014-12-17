@@ -1,0 +1,2 @@
+If you are not logged in, you can see all the questions on home page, click on the question name or permalink to see questions and answers, click on the tag to see all the questions that has that tag.
+If you are logged in, you can see more. You can see your own questions and answers, edit or delete it. You can upload images. You can include image links in your question or answer content and it will be shown. You can vote for question or answer. 
