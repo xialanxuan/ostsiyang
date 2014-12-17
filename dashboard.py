@@ -203,8 +203,8 @@ class Delete_Question(webapp2.RequestHandler):
 		bound_answer=Answer()
 		if users.get_current_user():
 			cur_question = bound_question.get_by_id(int(key))
-			cur_question.key.delete()
-			if cur_question.author == str(users.get_current_user()):		
+			if cur_question.author == str(users.get_current_user()):
+				cur_question.key.delete()		
 				answer=bound_answer.get_question(key)
 				for ans in answer:
 					ans.key.delete()
@@ -382,13 +382,12 @@ class Delete_Image(webapp2.RequestHandler):
 				
 				self.response.write('<p class="main"><b>Success!</b></p>')
 				self.response.write('<p class="main"><a href="/dashboard/image">My Images</a></p>')
-				time.sleep(1)
+				time.sleep(0.1)
 				self.redirect('/dashboard/image')
 		else:
 			self.response.write('<p class="main"><b>Permission Denial</b></p>')
 			self.response.write('<p class="main"><a href="/dashboard/image">My Images</a></p>')
-			#time.sleep(3)
-			#self.redirect('/dashboard/image')
+
 		tail(self)		
 
 app = webapp2.WSGIApplication([
