@@ -24,8 +24,8 @@
 
 	</div>
 	 <div class="post-content">
-		{{ que.body[0:500] |safe }}
-		{% if que.body|length > 500 %}
+		{{ que.bodyreplace[0:500] |safe }}
+		{% if que.bodyreplace|length > 500 %}
 		<br> <a href="{{ "/view=" ~ que.key.id() }}">More</a>
 		{% endif %}
 

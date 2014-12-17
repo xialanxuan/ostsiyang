@@ -46,6 +46,8 @@ def replace_html(string):
   string = re.sub(r'<a href="(\http[s]?://[^\s<>"]+|www\.[^\s<>"]+)">[^\s]+.gif</a>', r'<img src="\1">', newstring)
   return string
 
+
+
 def header(self):
         # Checks for active Google account session
         user = users.get_current_user()
@@ -139,13 +141,12 @@ class QuestionView(webapp2.RequestHandler):
         bound_ans=Answer()
         user = str(users.get_current_user())
         q_v_que=bound_que.get_by_id(int(que_key))
-        quebody = replace_html(q_v_que.body)
-        quebody = quebody.replace('\n', '<br>' )
+        #quebody = replace_html(q_v_que.body)
+        #quebody = quebody.replace('\n', '<br>' )
         q_v_ans=bound_ans.get_question(que_key)
         template_values={
         'que_key':que_key,
         'q_v_que': q_v_que,
-        'quebody': q_v_que.body,
         'q_v_ans': q_v_ans,
         'user': user,
         }
