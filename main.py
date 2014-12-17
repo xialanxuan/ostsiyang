@@ -327,12 +327,13 @@ class DownAnswer(webapp2.RequestHandler):
         tail(self)
 
 class ImageView(webapp2.RequestHandler):
-    def get(self, key):
+    def get(self, url):
         bound_image=Image()
-        im = bound_image.get_by_id(int(key))
-        if im.image:
-            self.response.headers['Content-Type'] = 'image/png'
-            self.response.out.write(im.image)
+        image = bound_image.get_url(url)
+        for im in image:
+            if im.image:
+                self.response.headers['Content-Type'] = 'image/png'
+                self.response.out.write(im.image)
 
 class RSSHandler(webapp2.RequestHandler):
     def get(self, view):

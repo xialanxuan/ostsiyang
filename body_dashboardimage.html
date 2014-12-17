@@ -8,7 +8,7 @@
 	<br>
 	{% for im in image %}	
 	 <div class="post-heading">
-		<h4><a href="{{ "/image=" ~ im.key.id() }}">{{ im.name }}</a></h4>
+		<h4><a href="{{ "/image=" ~ im.url }}">{{ im.name }}</a></h4>
 		<li>by {{ im.author }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at {{ im.date.strftime('%Y-%m-%d %H:%M') }}
 		</li>
 		<a href="{{ "/dashboard/imagedelete=" ~ im.key.id() }}">Delete</a>
