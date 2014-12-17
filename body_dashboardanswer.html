@@ -42,7 +42,7 @@
 
 	</div>
 	 <div class="post-content">
-		{{ ans.body}}
+		{{ ans.body | safe }}
 	</div>
 	<a href="{{ "/dashboard/answeredit=" ~ ans.key.id() }}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="{{ "/dashboard/answerdelete=" ~ ans.key.id() }}">Delete</a>
