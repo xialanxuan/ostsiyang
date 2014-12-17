@@ -34,11 +34,11 @@
 
 	</div>
 	 <div class="post-content">
-		{{ que.body[0:500] | safe}}
-		{% if que.body|length == 0 %}
+		{{ que.bodyreplace[0:500] | safe}}
+		{% if que.bodyreplace|length == 0 %}
 		<br> 
 		{% endif %}
-		{% if que.body|length > 500 %}
+		{% if que.bodyreplace|length > 500 %}
 		<br> <a href="{{ "/view=" ~ que.key.id() }}">More</a>
 		{% endif %}
 		<li>
@@ -48,7 +48,7 @@
 		</li>
 		<a href="{{ "/view=" ~ que.key.id() }}"> Permalink </a>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="{{ "/questionkey=" ~ que.key.id() ~ "/create" }}">Create Answer </a>
+		<a href="{{ "/dashboard/questionkey=" ~ que.key.id() ~ "/answer" }}">Create Answer </a>
 	</div>
 
 	<br><br>

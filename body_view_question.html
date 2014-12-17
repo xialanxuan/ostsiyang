@@ -33,7 +33,7 @@
 	</table>
 	</div>
 	 <div class="post-content">
-		{{ quebody | safe}}
+		{{ q_v_que.bodyreplace | safe}}
 		
 		<br>
 		<li>
@@ -53,6 +53,10 @@
 		<li>by {{ ans.author }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at {{ ans.date.strftime('%Y-%m-%d %H:%M') }}
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; last modify {{ ans.edit.strftime('%Y-%m-%d %H:%M') }}
 		</li>
+				{% if ans.author == user %}
+		<a href="{{ "/dashboard/answeredit=" ~ ans.key.id() }}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="{{ "/dashboard/answerdelete=" ~ ans.key.id() }}">Delete</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		{% endif %}
 		<table>
 		<tr>
 		<td>
@@ -72,7 +76,7 @@
 	</table>
 	</div>
 
-		{{ ans.body | safe }}
+		{{ ans.bodyreplace | safe }}
 
 		
 		<br>

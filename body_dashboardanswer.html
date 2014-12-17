@@ -23,7 +23,7 @@
 		<a href="{{ "/dashboard/questionkey=" ~ ans.qkey ~ "/answer" }}">Create Answer </a>
 	</div>
 	 <div class="post-content">
-		{{ ans.qbody }}
+		{{ ans.qbodyreplace | safe }}
 
 
 		<li>
@@ -39,13 +39,13 @@
 		<li>by {{ ans.author }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at {{ ans.date.strftime('%Y-%m-%d %H:%M') }}
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; last modify {{ ans.edit.strftime('%Y-%m-%d %H:%M') }}
 		</li>
-
-	</div>
-	 <div class="post-content">
-		{{ ans.body | safe }}
-	</div>
 	<a href="{{ "/dashboard/answeredit=" ~ ans.key.id() }}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="{{ "/dashboard/answerdelete=" ~ ans.key.id() }}">Delete</a>
+	</div>
+	 <div class="post-content">
+		{{ ans.bodyreplade | safe }}
+	</div>
+
 	<br><br>
 
 	{% endfor %}

@@ -135,8 +135,9 @@ class Create_Question(webapp2.RequestHandler):
 
 			if ques.title == '':
 				ques.title = 'DEFAULT_QUESTION_NAME'
-			ques.body = replace_html(self.request.get('quebody'))
-			ques.body = ques.body.replace('\n', '<br>')
+			ques.body = self.request.get('quebody')
+			ques.bodyreplace = replace_html(self.request.get('quebody'))
+			ques.bodyreplace = ques.bodyreplace.replace('\n', '<br>')
 			ques.tags = strip_tags(self.request.get('quetag'))
 			ques.put()
 
@@ -179,8 +180,9 @@ class Edit_Question(webapp2.RequestHandler):
 		ques.title = self.request.get('quetitle')
 		if ques.title == '':
 			ques.title = 'DEFAULT_QUESTION_NAME'
-		ques.body = replace_html(self.request.get('quebody'))
-		ques.body = ques.body.replace('\n', '<br>' )
+		ques.body = self.request.get('quebody')
+		ques.bodyreplace = replace_html(self.request.get('quebody'))
+		ques.bodyreplace = ques.bodyreplace.replace('\n', '<br>' )
 
 		ques.tags = strip_tags(self.request.get('quetag'))
 		ques.put()
@@ -246,15 +248,17 @@ class Create_Answer(webapp2.RequestHandler):
             ans.qkey = key
             ans.qauthor = cur_question.author
             ans.qtitle= cur_question.title
-            ans.qbody = replace_html(cur_question.body)
-            ans.qbody = ans.qbody.replace('\n', '<br>' )
+            ans.qbody = cur_question.body
+            ans.qbodyreplace = replace_html(cur_question.body)
+            ans.qbodyreplace = ans.qbody.replace('\n', '<br>' )
 
             ans.title = self.request.get('anstitle')
 
             if ans.title == '':
                 ans.title = 'DEFAULT_ANSWER_NAME'
-            ans.body = replace_html(self.request.get('ansbody'))
-            ans.body = ans.body.replace('\n', '<br>' )
+            ans.body = self.request.get('ansbody')
+            ans.bodyreplace = replace_html(self.request.get('ansbody'))
+            ans.bodyreplace = ans.bodyreplace.replace('\n', '<br>' )
 
             ans.put()
 
@@ -302,8 +306,9 @@ class Edit_Answer(webapp2.RequestHandler):
 
             if cur_answer.title == '':
                 cur_answer.title = 'DEFAULT_ANSWER_NAME'
-            cur_answer.body = replace_html(self.request.get('ansbody'))
-            cur_answer.body = cur_answer.body.replace('\n', '<br>' )
+            cur_answer.body = self.request.get('ansbody')
+            cur_answer.bodyreplace = replace_html(self.request.get('ansbody'))
+            cur_answer.bodyreplace = cur_answer.bodyreplace.replace('\n', '<br>' )
             cur_answer.put()
 
         header(self)
